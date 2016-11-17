@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Usuário</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="/static/css/tela.css" rel="stylesheet">
+    <link href="/static/css/materialize.min.css" rel="stylesheet">
+
+    <script src="/static/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="/static/js/script.js" type="text/javascript"></script>
+    <script src="/static/js/efeitos.js" type="text/javascript"></script>
+    <script src="/static/js/materialize.min.js" type="text/javascript"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body onload="getPosition()">
+
+    <!--<center><h1 class="batata">Batata</h1></center>
+	 <button id="botaoPesquisa" onclick="alo()"><i class="material-icons">grade</i></button>
+
+	 <input type="text" placeholder="Texto" name="Teste" class="entrada" id="en">-->
+
+    <nav class="nav_bar">
+        <div class="nav-wrapper blue-grey darken-3">
+            <a href="#!" class="brand-logo">Arquivos</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">Ajuda</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="http://10.3.1.52:5000/logout">{{ name }}</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a href="#">Ajuda</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="http://10.3.1.52:5000/logout">{{ name }}</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row" id="menu">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#listar"><i class="material-icons">list</i></a></li>
+                <li class="tab col s3"><a href="#upar"><i class="material-icons">cloud_upload</i></a></li>
+                <li class="tab col s3"><a href="#outros"><i class="material-icons">settings</i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ************************* Listar ************************* -->
+    <div data-role="page" id="listar">
+    </div>
+
+    <!-- ************************* Tab -> upar ************************* -->
+
+
+    <!-- ************************* Tab -> upar -> footer para upar arquivos ************************* -->
+    <div id="upar">
+        <div id="up" class="col s12">
+            <div class="row">
+                <!-- Lembrar de colocar o ip do servidor.-->
+                <form class="col s12" action="http://10.3.1.52:5000/upar" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Browse</span>
+                                <input type="file" name="file"><i class="material-icons right">folder</i>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Upload file" name="file">
+                                <br>
+                            </div>
+                            <div class="upload">
+                                <input type="hidden" id="local" />
+                                <button class="btn waves-effect waves-light red" type="submit">Upload
+                                    <i class="material-icons right">file_upload</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="tabela">
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th data-field="nome">Nome</th>
+                        <th data-field="lat">Latitude</th>
+                        <th data-field="lon">Longitude</th>
+                        <th data-field="drop">Remover</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for linha in lista %}
+                    <tr>
+                        <td>{{ linha[1] }}</td>
+                        <td>{{ linha[2] }}</td>
+                        <td>{{ linha[3] }}</td>
+                        <td>remove</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- <footer>
+        <h2> {{ name }} </h2>
+    </footer> -->
+
+</body>
+
+</html>

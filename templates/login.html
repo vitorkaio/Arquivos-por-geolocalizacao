@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br" manifest="caches.appcache">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="/static/css/login.css" rel="stylesheet">
+    <link href="/static/css/materialize.min.css" rel="stylesheet">
+
+    <script src="/static/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+    <script src="/static/js/script.js" type="text/javascript"></script>
+    <script src="/static/js/efeitos.js" type="text/javascript"></script>
+    <script src="/static/js/materialize.min.js" type="text/javascript"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <nav class="nav_bar">
+        <div class="nav-wrapper blue-grey darken-3">
+            <a href="#!" class="brand-logo">Login</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Cadastro</a></li>
+                <li><a href="#">Sobre</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Cadastro</a></li>
+                <li><a href="#">Sobre</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ************************* cadastrar ************************* -->
+    <div id="cadastrar" class="col s12 formulario">
+        <form method="post" action="/autenticar">
+            <div class="row">
+                <div class="col s12 m10">
+                    <div class="card-panel white">
+                        <!-- ************************* Usuário ************************* -->
+                        <div class="input-field col s12" id="usuario">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="entrada_titulo" type="text" class="validate" name="nome" required=''>
+                            <label for="entrada_titulo">usuário</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">lock</i>
+                                <input id="password" type="password" class="validate" name="senha" required=''>
+                                <label for="password">senha</label>
+                            </div>
+                        </div>
+
+                        <center>
+                            <input class="waves-effect waves-light btn" type="submit" value="login">
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+
+</html>
