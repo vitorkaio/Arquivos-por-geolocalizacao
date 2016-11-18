@@ -52,7 +52,9 @@
     </div>
 
     <!-- ************************* Listar ************************* -->
+    
     <div data-role="page" id="listar">
+       <div class="title_listar"><h5 class="header">Arquivos Perto</h5></div>
         <div class="tabela">
             <table class="responsive-table">
                 <thead>
@@ -70,7 +72,7 @@
                         <td>{{ linha[1] }}</td>
                         <td>{{ linha[2] }}</td>
                         <td>{{ linha[3] }}</td>
-                        <td><a href="#">Download</a></td>
+                        <td><a href="#"><i class="material-icons left">file_download</i></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -83,6 +85,7 @@
 
     <!-- ************************* Tab -> upar -> footer para upar arquivos ************************* -->
     <div id="upar">
+       <div class="title_listar"><h5 class="header">Meus Arquivos</h5></div>
         <div id="up" class="col s12">
             <div class="row">
                 <!-- Lembrar de colocar o ip do servidor.-->
@@ -125,7 +128,7 @@
                         <td>{{ linha[1] }}</td>
                         <td>{{ linha[2] }}</td>
                         <td>{{ linha[3] }}</td>
-                        <td>remove</td>
+                        <td><a href="#"><i class="material-icons left">delete</i></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

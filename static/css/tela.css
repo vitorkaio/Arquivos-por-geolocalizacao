@@ -1,19 +1,25 @@
-* {
+*{
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
 }
 
-.tabela{
+.tabela {
     margin-top: 5%;
     margin-bottom: 5%;
 }
 
-#up{
-    margin-top: 15%;
-    
+#up {
+    margin-top: 0%;
 }
 
-.upload{
+.upload {
     margin-left: 0%;
+}
+
+.title_listar {
+    margin-top: 10%;
+    margin-bottom: 8%;
+    color: #ee6e73;
+    text-align: center;
 }
