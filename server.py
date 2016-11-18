@@ -34,6 +34,7 @@ def static_file(path):
 @app.route('/logout', methods=['GET'])
 def logout():
     del session['nome']
+    del session['coo']
     return redirect('/')
 
 # Lembrar de mudar para post, se não, pode haver ataque xss
@@ -137,12 +138,18 @@ def lista_arquivos():
     for linha in lista:
         x = banco.sqlite_consulta_arquivos(linha)
         lista_arquivos.append(x)
-
-    return env.get_template('usuario.html').render(name=session['nome'], lista=lista_arquivos)
+        
+    # Pega todos os arquivos que estão pertos e printa.
+    listar_perto = []
+    try:
+        listar_perto = listar_arquivos_perto()
+    except:
+        pass
+    
+    return env.get_template('usuario.html').render(name=session['nome'], lista=lista_arquivos, listar_download=listar_perto)
 
 
 # **************************************** Listar arquivos perto ****************************************
-@app.route('/listar/perto', methods=['GET'])
 def listar_arquivos_perto():
     ''' Retorna uma lista de arquivos que estejam perto do usuário. '''
 
@@ -158,7 +165,8 @@ def listar_arquivos_perto():
 
     lista_id_usuarios = list()
     print str(lista_de_arquivos_perto)
-    #for linha listar_arquivos_perto:
+    
+    return lista_de_arquivos_perto
     
 # **************************************** Init ****************************************
 if __name__ == "__main__":

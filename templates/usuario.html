@@ -31,12 +31,12 @@
             <ul class="right hide-on-med-and-down">
                 <li><a href="#">Ajuda</a></li>
                 <li><a href="#">Sobre</a></li>
-                <li><a href="http://10.3.1.52:5000/logout">{{ name }}</a></li>
+                <li><a href="/logout">{{ name }}</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="#">Ajuda</a></li>
                 <li><a href="#">Sobre</a></li>
-                <li><a href="http://10.3.1.52:5000/logout">{{ name }}</a></li>
+                <li><a href="/logout">{{ name }}</a></li>
             </ul>
         </div>
     </nav>
@@ -53,6 +53,29 @@
 
     <!-- ************************* Listar ************************* -->
     <div data-role="page" id="listar">
+        <div class="tabela">
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th data-field="nome">Nome</th>
+                        <th data-field="lat">Latitude</th>
+                        <th data-field="lon">Longitude</th>
+                        <th data-field="drop">Download</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for linha in listar_download %}
+                    <tr>
+                        <td>{{ linha[1] }}</td>
+                        <td>{{ linha[2] }}</td>
+                        <td>{{ linha[3] }}</td>
+                        <td><a href="#">Download</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- ************************* Tab -> upar ************************* -->
@@ -63,7 +86,7 @@
         <div id="up" class="col s12">
             <div class="row">
                 <!-- Lembrar de colocar o ip do servidor.-->
-                <form class="col s12" action="http://10.3.1.52:5000/upar" method="POST" enctype="multipart/form-data">
+                <form class="col s12" action="/upar" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="file-field input-field">
                             <div class="btn">

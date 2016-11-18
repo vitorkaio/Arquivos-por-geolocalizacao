@@ -14,7 +14,7 @@ function getPosition() {
           //document.getElementById('local').setAttribute('name', p.toString())
           // Requisição HTTP
           var req = new XMLHttpRequest();
-          req.open('GET', "http://10.3.1.52:5000/coordenadas/" + p, false);
+          req.open('GET', "/coordenadas/" + p, false);
           req.send('ddd');
           var out = req.responseText;
 
