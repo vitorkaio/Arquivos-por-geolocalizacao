@@ -29,6 +29,25 @@ def home():
 def static_file(path):
     return app.send_static_file(path)
 
+# **************************************** Cadastra usuario ****************************************
+@app.route('/cadastro', methods=['GET'])
+def cadastro():
+    return env.get_template('cadastrar.html').render()
+
+
+@app.route('/cadastrar', methods=['POST'])
+def cadastrar():
+    
+    nome = request.form['nome']
+    senha = request.form['senha']
+    senha_confirmar = request.form['senha2']
+    
+    # Verifica se a senha e senha2 são as mesmas.
+    if senha == senha_confirmar:
+        # cadastra no banco.
+        return redirect('/')
+    
+    return env.get_template('cadastrar.html').render()  
 
 # **************************************** autenticar e login ****************************************
 @app.route('/logout', methods=['GET'])
@@ -114,12 +133,13 @@ def upa_arquivos():
                 # Cadastra na tabela local.
                 id_local = banco.sqlite_cadastra_arquivo(nome_arquivo, posicao_arquivo['lat'], posicao_arquivo['lon'])
 
+                # Pega o id do usuario.
                 id_usuario = banco.sqlite_consulta_usuario_nome(session['nome'])[0]
 
                 # Cadastra na tabela usuario_local
                 banco.sqlite_cadastra_usuario_arquivo(id_usuario, id_local)
 
-                # Apaga o arquivo do servidor Flask.
+        # Apaga o arquivo do servidor Flask.
         os.remove(nome_arquivo)
 
     return redirect('/lista_arquivos_upload')

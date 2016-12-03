@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Cadastrar</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -19,9 +19,10 @@
 </head>
 
 <body>
-    <nav class="nav_bar">
+   
+   <nav class="nav_bar">
         <div class="nav-wrapper blue-grey darken-3">
-            <a href="#!" class="brand-logo">Login</a>
+            <a href="#!" class="brand-logo">Cadastrar</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="/">Login</a></li>
@@ -35,10 +36,10 @@
             </ul>
         </div>
     </nav>
-
-    <!-- ************************* Logar ************************* -->
+    
+     <!-- ************************* Cadastrar ************************* -->
     <div id="cadastrar" class="col s12 formulario">
-        <form method="post" action="/autenticar">
+        <form method="post" action="/cadastrar">
             <div class="row">
                 <div class="col s12 m10">
                     <div class="card-panel white">
@@ -56,17 +57,24 @@
                                 <label for="password">senha</label>
                             </div>
                         </div>
-
+                        
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">lock</i>
+                                <input id="password2" type="password" class="validate" name="senha2" required=''>
+                                <label for="password2">confirmar senha</label>
+                            </div>
+                        </div>
+                        
                         <center>
-                            <input class="waves-effect waves-light btn" type="submit" value="login">
+                            <input class="btn waves-effect waves-light red" type="submit" value="cadastrar">
                         </center>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-
-
+    
 </body>
 
 </html>
