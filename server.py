@@ -98,6 +98,17 @@ def deleta_arquivo(nome):
     drop.deletar_arquivo(nome)
     return env.get_template('usuario.html').render()
 
+@app.route('/download/<string:nome>', methods=['GET'])
+def deleta_arquivo(nome):
+    print nome
+
+    # Verifica se o usuário logado existe no banco.
+    usuario = banco.sqlite_consulta_usuario(session['nome'], session['senha'])
+
+    drop = ClienteDropbox(usuario[3], usuario[4], usuario[5])
+    drop.baixar_arquivo(nome)
+    return env.get_template('usuario.html').render()
+
 @app.route('/upar', methods=['GET', 'POST'])
 def upa_arquivos():
     ''' upa arquivos do diretório do usuário. '''
