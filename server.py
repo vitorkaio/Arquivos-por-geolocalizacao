@@ -44,8 +44,10 @@ def cadastrar():
     
     # Verifica se a senha e senha2 são as mesmas.
     if senha == senha_confirmar:
-        # cadastra no banco.
-        return redirect('/')
+        verifyIsWrite = banco.sqlite_cadastra_cliente(nome , senha)
+        
+        if verifyIsWrite != 0:
+            return redirect('/')
     
     return env.get_template('cadastrar.html').render()  
 

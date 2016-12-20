@@ -49,6 +49,29 @@ def cria_banco():
 
 
 # *************************************** Tabela usuario ***************************************
+
+def sqlite_cadastra_cliente(nome, senha):
+    ''' Cadastra um usuário no banco de dados '''
+    
+    # Verifica se já existe um usuário com esse nome no banco de dados.
+    if sqlite_consulta_usuario_nome(nome) == 0:
+        chave = "0wvqa94vatwz0yl"
+        chave_secreta = "4bxxhi3gbaouu53"
+        token = "XWXkPnN5rtAAAAAAAAAAFFolZzdKs217u3bCFL5oRvdqwT0GwlTzTA33uzyUoN8S"
+    
+        con = sqlite3.connect(_ARQUIVO_BANCO_)
+        cursor = con.cursor()
+        cursor.execute('INSERT INTO usuario (nome, senha, chave, chave_secreta, token) VALUES ("%s", "%s", "%s", "%s", "%s")' % (nome, senha, chave, chave_secreta, token))
+    
+        idd = cursor.lastrowid
+        con.commit()
+        con.close()
+
+        print 'Out - cadastrar cliente: ' + str(idd)
+        return idd
+
+    return 0
+    
 def sqlite_consulta_usuario(nome, senha):
     ''' Verifica se existe no banco um usuário com este nome e com esta senha. '''
     
