@@ -35,11 +35,13 @@ class ClienteDropbox:
 
     def baixar_arquivo(self, path_arquivo):
         try:
-            f, metadata = client.get_file_and_metadata('/' + path_arquivo)
+            f, metadata = self.__client.get_file_and_metadata('/' + path_arquivo)
             out = open(path_arquivo, 'wb')
             out.write(f.read())
             out.close
-        except:
+            print metadata
+        except Exception as err:
+            print '\n\n **** Erro: ' + str(err) + '\n\n\n'
             return False
 
 

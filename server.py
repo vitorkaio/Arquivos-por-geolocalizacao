@@ -99,7 +99,7 @@ def deleta_arquivo(nome):
     return env.get_template('usuario.html').render()
 
 @app.route('/download/<string:nome>', methods=['GET'])
-def deleta_arquivo(nome):
+def download_arquivo(nome):
     print nome
 
     # Verifica se o usuário logado existe no banco.
