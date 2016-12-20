@@ -37,19 +37,19 @@ def cadastro():
 
 @app.route('/cadastrar', methods=['POST'])
 def cadastrar():
-    
+
     nome = request.form['nome']
     senha = request.form['senha']
     senha_confirmar = request.form['senha2']
-    
+
     # Verifica se a senha e senha2 são as mesmas.
     if senha == senha_confirmar:
         verifyIsWrite = banco.sqlite_cadastra_cliente(nome , senha)
-        
+
         if verifyIsWrite != 0:
             return redirect('/')
-    
-    return env.get_template('cadastrar.html').render()  
+
+    return env.get_template('cadastrar.html').render()
 
 # **************************************** autenticar e login ****************************************
 @app.route('/logout', methods=['GET'])
@@ -86,6 +86,17 @@ def pega_coordenada(coordenadas):
     session['coo'] = coordenadas
 
     return session['coo']
+
+@app.route('/deletar/<string:nome>', methods=['GET'])
+def deleta_arquivo(nome):
+    print nome
+
+    # Verifica se o usuário logado existe no banco.
+    usuario = banco.sqlite_consulta_usuario(session['nome'], session['senha'])
+
+    drop = ClienteDropbox(usuario[3], usuario[4], usuario[5])
+    drop.deletar_arquivo(nome)
+    return env.get_template('usuario.html').render()
 
 @app.route('/upar', methods=['GET', 'POST'])
 def upa_arquivos():
@@ -160,14 +171,14 @@ def lista_arquivos():
     for linha in lista:
         x = banco.sqlite_consulta_arquivos(linha)
         lista_arquivos.append(x)
-        
+
     # Pega todos os arquivos que estão pertos e printa.
     listar_perto = []
     try:
         listar_perto = listar_arquivos_perto()
     except:
         pass
-    
+
     return env.get_template('usuario.html').render(name=session['nome'], lista=lista_arquivos, listar_download=listar_perto)
 
 
@@ -187,9 +198,9 @@ def listar_arquivos_perto():
 
     lista_id_usuarios = list()
     print str(lista_de_arquivos_perto)
-    
+
     return lista_de_arquivos_perto
-    
+
 # **************************************** Init ****************************************
 if __name__ == "__main__":
     banco.cria_banco()

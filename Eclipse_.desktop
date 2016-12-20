@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=Eclipse 
+Exec=/home/renato/eclipse/jee-neon/eclipse/eclipse
+Type=Application
+Icon=/home/renato/eclipse/jee-neon/eclipse/icon.xpm

@@ -52,7 +52,7 @@
     </div>
 
     <!-- ************************* Listar ************************* -->
-    
+
     <div data-role="page" id="listar">
        <div class="title_listar"><h5 class="header">Arquivos Perto</h5></div>
         <div class="tabela">
@@ -128,7 +128,7 @@
                         <td>{{ linha[1] }}</td>
                         <td>{{ linha[2] }}</td>
                         <td>{{ linha[3] }}</td>
-                        <td><a href="#"><i class="material-icons left">delete</i></a></td>
+                        <td><a href="/deletar/{{linha[1]}}"><i class="material-icons left">delete</i></a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
