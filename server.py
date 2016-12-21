@@ -15,6 +15,7 @@ import banco
 from werkzeug import secure_filename
 from drop import ClienteDropbox
 import os
+import json
 
 app = Flask(__name__, static_url_path='/static')
 env = Environment(loader=PackageLoader(__name__, 'templates'))
@@ -96,7 +97,7 @@ def deleta_arquivo(nome):
 
     drop = ClienteDropbox(usuario[3], usuario[4], usuario[5])
     drop.deletar_arquivo(nome)
-    return env.get_template('usuario.html').render()
+    return redirect('/lista_arquivos_upload')
 
 @app.route('/download/<string:nome>', methods=['GET'])
 def download_arquivo(nome):
@@ -211,6 +212,17 @@ def listar_arquivos_perto():
     print str(lista_de_arquivos_perto)
 
     return lista_de_arquivos_perto
+
+
+@app.route('/lista_pin', methods=['GET'])
+def lista_pin():
+
+    lista = listar_arquivos_perto()
+    lis = json.dumps(lista)
+
+    print str(lis)
+
+    return lis
 
 # **************************************** Init ****************************************
 if __name__ == "__main__":

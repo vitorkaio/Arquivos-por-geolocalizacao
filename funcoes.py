@@ -15,7 +15,7 @@ def verifica_posicao(sua_posicao, arquivo_posicao):
     '''
 
     #distancia_max = 10 -> km
-    distancia_max = 0.4
+    distancia_max = 0.0001
     distancia = distancia_entre_dois_pontos(sua_posicao, arquivo_posicao)
 
     print '\n\nDistancia: ' + str(distancia) + '\n\n'
