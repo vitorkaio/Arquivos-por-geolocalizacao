@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
+<html>
     <meta charset="UTF-8">
     <title>Usuário</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,14 +13,22 @@
     <script src="/static/js/materialize.min.js" type="text/javascript"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-
-<body onload="getPosition()">
-
-    <!--<center><h1 class="batata">Batata</h1></center>
-	 <button id="botaoPesquisa" onclick="alo()"><i class="material-icons">grade</i></button>
-
-	 <input type="text" placeholder="Texto" name="Teste" class="entrada" id="en">-->
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 400px;
+        width: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
 
     <nav class="nav_bar">
         <div class="nav-wrapper blue-grey darken-3">
@@ -135,11 +141,56 @@
             </table>
         </div>
     </div>
+    <div id="map"></div>
+    <script>
+      function getPin(){
+        var req = new XMLHttpRequest();
+        req.open('GET', "/lista_pin", false);
+        req.send('ddd');
+        var out = req.responseText;
 
-    <!-- <footer>
-        <h2> {{ name }} </h2>
-    </footer> -->
+        var obj = JSON.parse(out.toString());
+        var pontos = [];
+        for (i = 0; i < obj.length; i++) {
+            var individual = [];
+            individual.push(obj[i][1],obj[i][2],obj[i][3]);
+            pontos.push(individual);
+        } 
+        return pontos; 
+    }
+    
+    function initMap() {
+        var locations = getPin();
 
-</body>
 
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: new google.maps.LatLng(-21.2228541, -43.7699221),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+
+        for (i = 0; i < locations.length; i++) {  
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map
+        });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][0]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+    }
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYdH-MOVaYO-aRKDCXYDaHBxVCWKCNdQw&callback=initMap">
+    </script>
+   
+  </body>
 </html>

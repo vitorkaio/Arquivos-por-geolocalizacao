@@ -97,6 +97,13 @@ def deleta_arquivo(nome):
 
     drop = ClienteDropbox(usuario[3], usuario[4], usuario[5])
     drop.deletar_arquivo(nome)
+
+    arquivo = banco.sqlite_consulta_local(nome)
+
+    #os.remove(nome)
+    banco.sqlite_deleta_usuario_local(usuario[0], arquivo[0])
+    banco.sqlite_deleta_arquivo(nome)
+
     return redirect('/lista_arquivos_upload')
 
 @app.route('/download/<string:nome>', methods=['GET'])
@@ -217,7 +224,7 @@ def listar_arquivos_perto():
 @app.route('/lista_pin', methods=['GET'])
 def lista_pin():
 
-    lista = listar_arquivos_perto()
+    lista = banco.sqlite_consulta_todos_arquivos()
     lis = json.dumps(lista)
 
     print str(lis)

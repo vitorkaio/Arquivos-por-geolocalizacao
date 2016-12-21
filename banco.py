@@ -151,6 +151,22 @@ def sqlite_consulta_arquivos(id_local):
     con.close()
     return linha
 
+def sqlite_consulta_todos_arquivos():
+    ''' Retorna uma lista com todos os arquivos de acordo com o id passado como parâmetro. '''
+    lista_arquivos = list()
+    con = sqlite3.connect(_ARQUIVO_BANCO_)
+    cursor = con.cursor()
+    # cursor.prepare("SELECT * FROM users where id=?")
+    # execute($data);
+    cursor.execute('SELECT * from local')
+    for linha in cursor.fetchall():
+        lista_arquivos.append(linha)
+
+    con.close()
+
+    return lista_arquivos
+
+
 # *************************************** Tabela usuario_local ***************************************
 def sqlite_cadastra_usuario_arquivo(id_usuario, id_local):
     ''' Cadastrar na tabela usuario_local o id do usuario e do local '''
@@ -177,14 +193,26 @@ def sqlite_consulta_id_usuario_local(id_usuario):
     con.close()
     return lista_arquivos
 
+##################################################### Deleta o arquivo do banco de dados ##################################################################################33
 def sqlite_deleta_arquivo(nome):
     con = sqlite3.connect(_ARQUIVO_BANCO_)
     cursor = con.cursor()
     # cursor.prepare("SELECT * FROM users where id=?")
     # execute($data);
     cursor.execute('DELETE from local WHERE arquivo=?', (nome,))
+    con.commit()
     con.close()
 
+def sqlite_deleta_usuario_local(id_usuario, id_local):
+
+    try:
+        con = sqlite3.connect(_ARQUIVO_BANCO_)
+        cursor = con.cursor()
+        cursor.execute('DELETE from usuario_local WHERE id_usuario=? AND id_local=?', (id_usuario, id_local))
+        con.commit()
+        con.close()
+    except Exception as err:
+        print '\n\n **** Erro: ' + str(err) + '\n\n\n'
 
 def sqlite_consulta_id_local_usuario(id_local):
     ''' Retorna uma lista com todos os id's de usuários que pertence ao arquivo com id passado como parâmetro. '''

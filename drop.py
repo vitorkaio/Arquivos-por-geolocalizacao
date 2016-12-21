@@ -36,7 +36,7 @@ class ClienteDropbox:
     def baixar_arquivo(self, path_arquivo):
         try:
             f, metadata = self.__client.get_file_and_metadata('/' + path_arquivo)
-            out = open(path_arquivo, 'wb')
+            out = open('download/' + path_arquivo, 'wb')
             out.write(f.read())
             out.close
             print metadata
